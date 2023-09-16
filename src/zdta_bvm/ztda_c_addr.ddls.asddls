@@ -10,6 +10,7 @@ define root view entity ZTDA_C_ADDR
       AddrPoolUUID,
       @EndUserText.label: 'Address ID'
       ID,
+//      test
 //      @EndUserText.label: 'Address Pool ID'
 //      @Search.defaultSearchElement: true
 //      @Consumption.valueHelpDefinition: [{ entity:  {name: 'ZTDA_I_ADDR_POOL' , element: 'ID' }, distinctValues: true }]
