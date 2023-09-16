@@ -1,0 +1,140 @@
+managed implementation in class ztda_cl_book unique;
+strict ( 1 );
+with draft;
+
+define behavior for ZTDA_I_BOOK alias Booking
+persistent table ztda_a_book
+draft table ztda_d_book
+etag master LocLastChanged
+lock master total etag LastChanged
+authorization master ( global )
+
+{
+  association _Trip { create; with draft; }
+
+  create;
+  update;
+  delete;
+
+  // Field options
+  field ( readonly )
+  UUID,
+  ID,
+  BegDate,
+  BegTime,
+  EndDate,
+  EndTime,
+  CustName,
+  ManagName,
+  BookStatus,
+  WeightDeliv,
+  LastChanged,
+  LocLastChanged;
+
+  field ( numbering : managed )
+  UUID;
+
+  // Determinations
+  determination calc_default_data on save { create; }
+  determination calc_status on save { create; update; field BookStatus; }
+  determination calc_Weight on modify { field WeightDeliv; }
+
+  // Validation
+  validation validate_Customer on save { field CustID; }
+  validation validate_Manager on save { field ManagID; }
+//  validation validate_Dates on save { field BegDate, BegTime, EndDate, EndTime; }
+
+  // Actions
+  action ( features : instance ) EndBook result [1..*] $self;
+
+  draft action Edit;
+  draft action Activate;
+  draft action Discard;
+  draft action Resume;
+  draft determine action Prepare
+  {
+    determination calc_default_data;
+    determination calc_status;
+    validation validate_Customer;
+    validation validate_Manager;
+//    validation validate_Dates;
+  }
+
+  mapping for ztda_a_book
+    {
+      UUID           = uuid;
+      ID             = id;
+      BegDate        = beg_date;
+      BegTime        = beg_time;
+      EndDate        = end_date;
+      EndTime        = end_time;
+      CustID         = cust_id;
+      ManagID        = manag_id;
+      WeightDeliv    = weight_deliv;
+      BookStatus     = book_status;
+      LocLastChanged = loc_last_changed;
+      LastChanged    = last_changed;
+    }
+ }
+
+define behavior for ZTDA_i_trip alias Trip
+persistent table ztda_a_trip
+draft table ztda_d_trip
+lock dependent by _Booking
+authorization dependent by _Booking
+etag master LocLastChanged
+
+{
+  association _Booking { with draft; }
+
+  update;
+  delete;
+
+  // Field options
+  field ( readonly )
+  BookUUID,
+  TripID,
+  TripNumber,
+  DriverName,
+  TripStatus,
+  LastChanged,
+  LocLastChanged;
+  field ( readonly, numbering : managed )
+  UUID;
+
+
+  // Determinations
+  determination calc_default_data on save { create; }
+  determination calc_status on modify { field TripStatus; }
+
+  // Validation
+  validation validate_Car on save { field CarID; }
+  validation validate_Trailler on save { field TraillerID; }
+  validation validate_Driver on save { field DriverID; }
+//  validation validate_Address on save { field AddressID; }
+  validation validate_Material on save { field MaterialID; }
+//  validation validate_Dates on save { field BegDate, BegTime, EndDate, EndTime; }
+
+  // Actions
+  action ( features : instance ) EndTrip result [1] $self;
+  mapping for ztda_a_trip
+    {
+      UUID           = uuid;
+      BookUUID       = book_uuid;
+      TripID         = trip_id;
+      TripNumber     = trip_number;
+      BegDate        = beg_date;
+      BegTime        = beg_time;
+      EndDate        = end_date;
+      EndTime        = end_time;
+      MaterialID     = material_id;
+      Weight         = weight;
+//      AddressID      = addr_id;
+      DriverID       = driver_id;
+      CarID          = car_id;
+      TraillerID     = trailler_id;
+      TripStatus     = trip_status;
+      LocLastChanged = loc_last_changed;
+      LastChanged    = last_changed;
+    }
+}

@@ -1,0 +1,61 @@
+managed implementation in class ztda_cl_car unique;
+strict ( 1 );
+with draft;
+
+define behavior for ZTDA_I_CAR alias Car
+persistent table ztda_a_car
+draft table ztda_d_car
+etag master LocLastChanged
+lock master total etag LastChanged
+authorization master ( global )
+
+{
+
+  field ( readonly )
+  UUID,
+  FuelName,
+  BrandName,
+  ImgURL,
+  ColorName,
+  LastChanged,
+  LocLastChanged;
+
+  field ( numbering : managed )
+  UUID;
+
+  field ( mandatory : create , readonly : update )
+  ID;
+
+  create;
+  update;
+  delete;
+
+  draft action Edit;
+  draft action Activate;
+  draft action Discard;
+  draft action Resume;
+  draft determine action Prepare;
+  mapping for ztda_a_car
+    {
+      UUID             = uuid;
+      ID               = id;
+      BrandID          = brand_id;
+      Model            = model;
+      Color            = color;
+      YerCreation      = yer_creation;
+      TechnicType      = technic_type;
+      BodyType         = body_type;
+      DateRegistration = date_registration;
+      BodyNumber       = body_number;
+      RegNumber        = reg_number;
+      Consumption      = consumption;
+      Capacity         = capacity;
+      AxesNumber       = axes_number;
+      PaytoolID        = paytool_id;
+      Fuel             = fuel;
+      CarStatus        = car_status;
+      LocLastChanged   = loc_last_changed;
+      LastChanged      = last_changed;
+    }
+
+}

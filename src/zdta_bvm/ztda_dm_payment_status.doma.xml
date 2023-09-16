@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_DOMA" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <DD01V>
+    <DOMNAME>ZTDA_DM_PAYMENT_STATUS</DOMNAME>
+    <DDLANGUAGE>E</DDLANGUAGE>
+    <DATATYPE>CHAR</DATATYPE>
+    <LENG>000001</LENG>
+    <OUTPUTLEN>000001</OUTPUTLEN>
+    <VALEXI>X</VALEXI>
+    <DDTEXT>Payment Status</DDTEXT>
+    <DOMMASTER>E</DOMMASTER>
+    <ABAP_LANGUAGE_VERSION>5</ABAP_LANGUAGE_VERSION>
+   </DD01V>
+   <DD07V_TAB>
+    <DD07V>
+     <DOMNAME>ZTDA_DM_PAYMENT_STATUS</DOMNAME>
+     <VALPOS>0001</VALPOS>
+     <DDLANGUAGE>E</DDLANGUAGE>
+     <DOMVALUE_L>1</DOMVALUE_L>
+     <DDTEXT>paid</DDTEXT>
+    </DD07V>
+    <DD07V>
+     <DOMNAME>ZTDA_DM_PAYMENT_STATUS</DOMNAME>
+     <VALPOS>0002</VALPOS>
+     <DDLANGUAGE>E</DDLANGUAGE>
+     <DOMVALUE_L>2</DOMVALUE_L>
+     <DDTEXT>not paid</DDTEXT>
+    </DD07V>
+    <DD07V>
+     <DOMNAME>ZTDA_DM_PAYMENT_STATUS</DOMNAME>
+     <VALPOS>0003</VALPOS>
+     <DDLANGUAGE>E</DDLANGUAGE>
+     <DOMVALUE_L>3</DOMVALUE_L>
+     <DDTEXT>paid partially</DDTEXT>
+    </DD07V>
+    <DD07V>
+     <DOMNAME>ZTDA_DM_PAYMENT_STATUS</DOMNAME>
+     <VALPOS>0004</VALPOS>
+     <DDLANGUAGE>E</DDLANGUAGE>
+     <DOMVALUE_L>4</DOMVALUE_L>
+     <DDTEXT>overdue</DDTEXT>
+    </DD07V>
+   </DD07V_TAB>
+  </asx:values>
+ </asx:abap>
+</abapGit>

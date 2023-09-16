@@ -1,0 +1,318 @@
+@Metadata.layer: #CORE
+//@UI: {
+//  headerInfo: {
+//    typeName: 'Employee',
+//    typeNamePlural: 'Employees',
+//    title: { type: #STANDARD, label: 'Surame', value: 'Surname' }
+//  }
+//}
+annotate view ZTDA_I_EMPL with
+{
+
+  @UI.facet: [
+  
+  
+             { id: 'ID',
+              purpose: #HEADER,
+              type: #DATAPOINT_REFERENCE,
+              position: 10,
+              targetQualifier: 'ID'
+             },
+             
+             { id: 'PositionName',
+              purpose: #HEADER,
+              type: #DATAPOINT_REFERENCE,
+              position: 20,
+              targetQualifier: 'PositionName'
+             },
+             
+            { id: 'Surname',
+              purpose: #HEADER,
+              type: #DATAPOINT_REFERENCE,
+              position: 30,
+              targetQualifier: 'Surname'
+             },
+
+            { id: 'Name',
+              purpose: #HEADER,
+              type: #DATAPOINT_REFERENCE,
+              position: 40,
+              targetQualifier: 'Name'
+             },
+
+            { id: 'PatronycName',
+              purpose: #HEADER,
+              type: #DATAPOINT_REFERENCE,
+              position: 50,
+              targetQualifier: 'PatronycName'
+             },
+
+            { id: 'BegDate',
+              purpose: #HEADER,
+              type: #DATAPOINT_REFERENCE,
+              position: 60,
+              targetQualifier: 'BegDate'
+             },
+
+            { id: 'EndDate',
+              purpose: #HEADER,
+              type: #DATAPOINT_REFERENCE,
+              position: 70,
+              targetQualifier: 'EndDate'
+             },
+             
+             
+
+              { id: 'EmployeeInfo',
+                purpose: #STANDARD,
+                type: #COLLECTION,
+                label: 'Employee info',
+                position: 10
+                },
+
+
+
+              { id: 'GeneralInfo',
+                purpose: #STANDARD,
+                type: #COLLECTION,
+                parentId: 'EmployeeInfo',
+                label: 'General Info',
+                position: 10
+                },
+
+            { id: 'BasicData',
+              purpose: #STANDARD,
+              type: #FIELDGROUP_REFERENCE,
+              parentId: 'GeneralInfo',
+              label: 'Basic Data',
+              position: 10,
+              targetQualifier: 'BasicData'
+             },
+
+            { id: 'DateTimeData',
+              purpose: #STANDARD,
+              type: #FIELDGROUP_REFERENCE,
+              parentId: 'GeneralInfo',
+              label: 'Data/Time',
+              position: 20,
+              targetQualifier: 'DateTimeData'
+             },
+
+            { id: 'PersonalData',
+              purpose: #STANDARD,
+              type: #FIELDGROUP_REFERENCE,
+              parentId: 'GeneralInfo',
+              label: 'Personal Data',
+              position: 30,
+              targetQualifier: 'PersonalData'
+             },
+             
+             
+
+              { id: 'Position',
+                purpose: #STANDARD,
+                type: #IDENTIFICATION_REFERENCE,
+                label: 'Position info',
+                position: 20,
+                targetElement: '_Position'
+                },
+
+
+              { id: 'Address',
+                purpose: #STANDARD,
+                type: #IDENTIFICATION_REFERENCE,
+                label: 'Address info',
+                position: 30,
+                targetElement: '_Address'}
+
+  //               { id: 'DateCr', purpose: #STANDARD, type: #FIELDGROUP_REFERENCE,
+  //                 parentId: 'Employee', label: 'Created', position: 40,
+  //                 targetQualifier: 'DateCrGroup' },
+  //               { id: 'DateChg', purpose: #STANDARD, type: #FIELDGROUP_REFERENCE,
+  //                 parentId: 'Employee', label: 'Changed', position: 50,
+  //                 targetQualifier: 'DateChgGroup' }
+             ]
+  @UI.hidden: true
+  UUID;
+
+  @UI.dataPoint:{ 
+    qualifier: 'ID', 
+    title:'ID'
+    }
+  @UI.lineItem: [ {
+    position: 10 ,
+    importance: #MEDIUM,
+    label: ''
+  } ]
+  @UI.identification: [ {
+    position: 10 ,
+    label: ''
+  } ]
+  @UI.fieldGroup: [{
+  qualifier: 'BasicData',
+  position: 10
+  } ]
+  ID;
+
+  @UI.lineItem: [ {
+  position: 20 ,
+  importance: #MEDIUM,
+  label: ''
+  } ]
+  @UI.identification: [ {
+    position: 20 ,
+    label: ''
+  } ]
+  @UI.fieldGroup: [{
+  qualifier: 'BasicData',
+  position: 20
+  } ]
+  PositionID;
+
+  @UI.dataPoint:{ 
+    qualifier: 'PositionName', 
+    title:'Position Name'
+    }
+  @UI.lineItem: [ {
+  position: 25 ,
+  importance: #MEDIUM,
+  label: ''
+  } ]
+  @UI.identification: [ {
+    position: 25 ,
+    label: ''
+  } ]
+  @UI.fieldGroup: [{
+  qualifier: 'BasicData',
+  position: 30
+  } ]
+  PositionName;
+
+  @UI.lineItem: [ {
+    position: 30 ,
+    importance: #MEDIUM,
+    label: ''
+  } ]
+  @UI.identification: [ {
+    position: 30 ,
+    label: ''
+  } ]
+  @UI.fieldGroup: [{
+  qualifier: 'PersonalData',
+  position: 50
+  } ]
+  AddressID;
+
+  @UI.lineItem: [ {
+    position: 40 ,
+    importance: #MEDIUM,
+    label: ''
+  } ]
+  @UI.identification: [ {
+    position: 40 ,
+    label: ''
+  } ]
+  @UI.fieldGroup: [{
+  qualifier: 'PersonalData',
+  position: 40
+  } ]
+  BirthDate;
+
+  @UI.dataPoint:{ 
+    qualifier: 'BegDate', 
+    title:'Begining Date'
+    }
+  @UI.lineItem: [ {
+    position: 50 ,
+    importance: #MEDIUM,
+    label: ''
+  } ]
+  @UI.identification: [ {
+    position: 50 ,
+    label: ''
+  } ]
+  @UI.fieldGroup: [{
+  qualifier: 'DateTimeData',
+  position: 10
+  } ]
+  BegDate;
+
+  @UI.dataPoint:{ 
+    qualifier: 'EndDate', 
+    title:'End Date'
+    }
+  @UI.lineItem: [ {
+    position: 60 ,
+    importance: #MEDIUM,
+    label: ''
+  } ]
+  @UI.identification: [ {
+    position: 60 ,
+    label: ''
+  } ]
+  @UI.fieldGroup: [{
+  qualifier: 'DateTimeData',
+  position: 20
+  } ]
+  EndDate;
+
+  @UI.dataPoint:{ 
+    qualifier: 'Surname', 
+    title:'Surname'
+    }
+  @UI.lineItem: [ {
+    position: 70 ,
+    importance: #MEDIUM,
+    label: ''
+  } ]
+  @UI.identification: [ {
+    position: 70 ,
+    label: ''
+  } ]
+  @UI.fieldGroup: [{
+  qualifier: 'PersonalData',
+  position: 10
+  } ]
+  Surname;
+
+  @UI.dataPoint:{ 
+    qualifier: 'Name', 
+    title:'Name'
+    }
+  @UI.lineItem: [ {
+    position: 80 ,
+    importance: #MEDIUM,
+    label: ''
+  } ]
+  @UI.identification: [ {
+    position: 80 ,
+    label: ''
+  } ]
+  @UI.fieldGroup: [{
+  qualifier: 'PersonalData',
+  position: 20
+  } ]
+  Name;
+
+  @UI.dataPoint:{ 
+    qualifier: 'PatronycName', 
+    title:'Patronyc Name'
+    }
+  @UI.lineItem: [ {
+    position: 90 ,
+    importance: #MEDIUM,
+    label: ''
+  } ]
+  @UI.identification: [ {
+    position: 90 ,
+    label: ''
+  } ]
+  @UI.fieldGroup: [{
+  qualifier: 'PersonalData',
+  position: 30
+  } ]
+  PatronycName;
+
+  @UI.hidden: true
+  LocLastChanged;
+}

@@ -1,0 +1,49 @@
+managed implementation in class ztda_cl_empl unique;
+strict ( 1 );
+with draft;
+
+define behavior for ZTDA_I_EMPL alias Employee
+persistent table ztda_a_empl
+draft table ztda_d_empl
+etag master LocLastChanged
+lock master total etag LastChanged
+authorization master ( global )
+
+{
+  field ( readonly )
+  UUID,
+  LastChanged,
+  LocLastChanged;
+
+  field ( numbering : managed )
+  UUID;
+
+  field ( mandatory : create , readonly : update )
+  ID;
+
+  create;
+  update;
+  delete;
+
+  draft action Edit;
+  draft action Activate;
+  draft action Discard;
+  draft action Resume;
+  draft determine action Prepare;
+  mapping for ztda_a_empl
+    {
+      UUID           = uuid;
+      ID             = id;
+      AddressID      = address_id;
+      PositionID     = pos_id;
+      BirthDate      = birth_date;
+      BegDate        = beg_date;
+      EndDate        = end_date;
+      Surname        = surname;
+      Name           = name;
+      PatronycName   = patronyc_name;
+      LocLastChanged = loc_last_changed;
+      LastChanged    = last_changed;
+    }
+
+}

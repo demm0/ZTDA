@@ -1,0 +1,47 @@
+managed implementation in class ztda_cl_Bank unique;
+strict ( 1 );
+with draft;
+
+define behavior for ZTDA_I_BANK alias Bank
+persistent table ztda_a_bank
+draft table ztda_d_Bank
+etag master LocLastChanged
+lock master total etag LastChanged
+authorization master( global )
+
+{
+  field ( readonly )
+   UUID,
+   ID,
+   LastChanged,
+   LocLastChanged;
+
+  field ( numbering : managed )
+   UUID;
+
+  // Determinations
+  determination calc_default_data on save { create; }
+
+  // Actions
+  action ( features : instance ) change_imgurl result [1] $self;
+
+  create;
+  update;
+  delete;
+
+  draft action Edit;
+  draft action Activate;
+  draft action Discard;
+  draft action Resume;
+  draft determine action Prepare;
+
+  mapping for ZTDA_A_BANK
+  {
+    UUID = uuid;
+    ID = id;
+    BankName = bank_name;
+    AddrID = addr_id;
+    LocLastChanged = loc_last_changed;
+    LastChanged = last_changed;
+  }
+}

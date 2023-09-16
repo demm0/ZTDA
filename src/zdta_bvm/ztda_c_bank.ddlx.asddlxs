@@ -1,0 +1,170 @@
+@Metadata.layer: #CORE
+@UI: {
+  headerInfo: {
+    typeName: 'Bank',
+    typeNamePlural: 'Banks',
+    imageUrl: 'ImgURL',
+    title: { type: #STANDARD, label: 'Bank ID', value: 'BankName' }
+  }
+}
+
+annotate view ZTDA_I_BANK with
+{
+  @UI.facet: [
+
+            { id: 'ID',
+              purpose: #HEADER,
+              type: #DATAPOINT_REFERENCE,
+              position: 10,
+              targetQualifier: 'ID'
+             },
+
+            { id: 'BankName',
+              purpose: #HEADER,
+              type: #DATAPOINT_REFERENCE,
+              position: 20,
+              targetQualifier: 'BankName'
+             },
+
+
+
+            { id: 'GeneralInfo',
+              purpose: #STANDARD,
+              label: 'General Information',
+              type: #COLLECTION,
+              position: 10
+             },
+
+            { id: 'BasicData',
+              purpose: #STANDARD,
+              type: #FIELDGROUP_REFERENCE,
+              parentId: 'GeneralInfo',
+              label: 'Basic Data',
+              position: 10,
+              targetQualifier: 'BasicData'
+             },
+
+            { id: 'AddressData',
+              purpose: #STANDARD,
+              type: #FIELDGROUP_REFERENCE,
+              parentId: 'GeneralInfo',
+              label: 'Address Data',
+              position: 20,
+              targetQualifier: 'AddressData'
+             },
+
+  //            { id: 'DateChg',
+  //              purpose: #STANDARD,
+  //              type: #FIELDGROUP_REFERENCE,
+  //              parentId: 'GeneralInfo',
+  //              label: 'Date Data',
+  //              position: 30,
+  //              targetQualifier: 'DateGroup'
+  //             },
+
+
+
+
+            { id: 'AddressInfo',
+              purpose: #STANDARD,
+              type: #IDENTIFICATION_REFERENCE,
+              label: 'Address info',
+              position: 20,
+              targetElement: '_Address'},
+
+
+
+            { id: 'CustomerInfo',
+              purpose: #STANDARD,
+              type: #LINEITEM_REFERENCE,
+              label: 'Customer Info',
+              position: 30,
+              targetElement: '_Customer'}
+
+
+             ]
+  @UI.hidden: true
+  UUID;
+
+  @UI.dataPoint:{
+  qualifier: 'ImgURL'
+  }
+  @UI.lineItem: [ {
+  position: 10 ,
+  importance: #MEDIUM,
+  label: ''
+  } ]
+  @UI.identification: [ {
+    position: 10 ,
+    label: ''
+  } ]
+  @UI.fieldGroup: [{
+    qualifier: 'BasicData',
+    position: 10
+  } ]
+  ImgURL;
+
+  // Отображение в шапке сведений о Банке
+  @UI.dataPoint:{
+    qualifier: 'ID',
+    title:'Bank ID'
+    }
+  // Отображение в списке сведений о Банке ( в других entity. например в customer)
+  @UI.lineItem: [ {
+    position: 20 ,
+    importance: #MEDIUM,
+    label: 'Bank ID'
+  } ]
+  // Отображение в ???
+  @UI.identification: [ {
+    position: 20 ,
+    label: 'Bank ID'
+  } ]
+  // Отображение в указанной в 'qualifier:'  группе полей
+  @UI.fieldGroup: [{
+    qualifier: 'BasicData',
+    position: 10
+  } ]
+  ID;
+
+  @UI.dataPoint:{
+    qualifier: 'BankName',
+    title:'Bank Name'
+    }
+  @UI.lineItem: [ {
+    position: 30 ,
+    importance: #MEDIUM,
+    label: 'Bank Name'
+  } ]
+  @UI.identification: [ {
+    position: 30 ,
+    label: 'Bank Name'
+  } ]
+  @UI.fieldGroup: [{
+    qualifier: 'BasicData',
+    position: 20
+  } ]
+  BankName;
+
+  //  @UI.lineItem: [ {
+  //    position: 40 ,
+  //    importance: #MEDIUM,
+  //    label: ''
+  //  } ]
+  @UI.identification: [ {
+    position: 40 ,
+    label: ''
+  } ]
+  @UI.fieldGroup: [{
+    qualifier: 'AddressData',
+    position: 10
+  } ]
+  AddrID;
+
+  @UI.fieldGroup: [{
+    qualifier: 'DateGroup',
+    position: 10
+  } ]
+  //  @UI.hidden: true
+  LocLastChanged;
+}

@@ -1,0 +1,363 @@
+@Metadata.layer: #CORE
+@UI: {
+  headerInfo: {
+    typeName: 'Booking',
+    typeNamePlural: 'Bookings',
+    title: { type: #STANDARD, label: 'Booking ID', value: 'ID' }
+  }
+}
+annotate view ZTDA_C_BOOK with
+{
+  @UI.facet: [
+            
+//            { id: 'ID',
+//              purpose: #HEADER,
+//              type: #DATAPOINT_REFERENCE,
+//              position: 10,
+//              targetQualifier: 'ID'
+//             },             
+                         
+             
+            { id: 'BookStatus',
+              purpose: #HEADER,
+              type: #DATAPOINT_REFERENCE,
+              position: 20,
+              targetQualifier: 'BookStatus'
+             },
+
+             
+            { id: 'WeightDeliv',
+              purpose: #HEADER,
+              type: #DATAPOINT_REFERENCE,
+              position: 20,
+              targetQualifier: 'WeightDeliv'
+             },
+             
+             
+            { id: 'BegDate',
+              purpose: #HEADER,
+              type: #DATAPOINT_REFERENCE,
+              position: 40,
+              targetQualifier: 'BegDate'
+             },
+
+
+            { id: 'BegTime',
+              purpose: #HEADER,
+              type: #DATAPOINT_REFERENCE,
+              position: 50,
+              targetQualifier: 'BegTime'
+             },
+
+            { id: 'EndDate',
+              purpose: #HEADER,
+              type: #DATAPOINT_REFERENCE,
+              position: 60,
+              targetQualifier: 'EndDate'
+             },
+
+
+            { id: 'EndTime',
+              purpose: #HEADER,
+              type: #DATAPOINT_REFERENCE,
+              position: 70,
+              targetQualifier: 'EndTime'
+             },
+
+
+            { id: 'GeneralInfo',
+              purpose: #STANDARD,
+              label: 'General Information',
+              type: #COLLECTION,
+              position: 10
+             },
+
+            { id: 'BasicData',
+              purpose: #STANDARD,
+              type: #FIELDGROUP_REFERENCE,
+              parentId: 'GeneralInfo',
+              label: 'Basic Data',
+              position: 10,
+              targetQualifier: 'BasicData'
+             },
+
+            { id: 'DateTimeData',
+              purpose: #STANDARD,
+              type: #FIELDGROUP_REFERENCE,
+              parentId: 'GeneralInfo',
+              label: 'Data/Time',
+              position: 20,
+              targetQualifier: 'DateTimeData'
+             },
+
+            { id: 'CustomerData',
+              purpose: #STANDARD,
+              type: #FIELDGROUP_REFERENCE,
+              parentId: 'GeneralInfo',
+              label: 'Customer Data',
+              position: 30,
+              targetQualifier: 'CustomerData'
+             },
+
+            { id: 'ManagerData',
+              purpose: #STANDARD,
+              type: #FIELDGROUP_REFERENCE,
+              parentId: 'GeneralInfo',
+              label: 'Manager Data',
+              position: 40,
+              targetQualifier: 'ManagerData'
+             },
+             
+
+
+              { id: 'Trip',
+                purpose: #STANDARD,
+                type: #LINEITEM_REFERENCE,
+                label: 'Trip info',
+                position: 20,
+                targetElement: '_Trip'
+               },
+    
+              { id: 'General', 
+                purpose: #STANDARD, 
+                type: #IDENTIFICATION_REFERENCE,
+                parentId: 'Trip', 
+                label: 'Trip info', 
+                position: 20 },                
+                               
+
+
+              { id: 'TripWeight',
+                label: 'Weight',
+                position: 30,
+                purpose: #STANDARD,
+                targetElement: '_Trip',
+                targetQualifier: 'TripWeight',
+                type: #CHART_REFERENCE },
+
+
+
+              { id: 'Customer',
+                purpose: #STANDARD,
+                type: #LINEITEM_REFERENCE,
+                label: 'Customer info',
+                position: 40,
+                targetElement: '_Customer'
+               },
+
+
+
+              { id: 'Employee',
+                purpose: #STANDARD,
+                type: #LINEITEM_REFERENCE,
+                label: 'Manager info',
+                position: 50,
+                targetElement: '_Employee'
+               }
+
+
+  //              { id: 'DateCr',
+  //                purpose: #STANDARD,
+  //                type: #FIELDGROUP_REFERENCE,
+  //                parentId: 'Trip',
+  //                label: 'Created',
+  //                position: 70,
+  //                targetQualifier: 'DateCrGroup'
+  //               },
+
+  //              { id: 'DateChg',
+  //                purpose: #STANDARD,
+  //                type: #FIELDGROUP_REFERENCE,
+  //                parentId: 'Trip',
+  //                label: 'Changed',
+  //                position: 80,
+  //                targetQualifier: 'DateChgGroup'
+  //                }
+             ]     
+        
+  @UI.lineItem: [{ type: #FOR_ACTION,position: 5, dataAction: 'EndBook',  label: 'Close Book' }]         
+  @UI.hidden: true
+  UUID;
+
+  @UI.dataPoint: { qualifier: 'ID', title: 'ID:'}
+  @UI.lineItem: [ {
+    position: 10 ,
+    importance: #MEDIUM,
+    label: ''
+  } ]
+  @UI.identification: [ {
+    position: 10 ,
+    label: ''
+  } ]
+  @UI.fieldGroup: [{
+    qualifier: 'BasicData',
+    position: 10
+  } ]  
+  ID;
+
+  @UI.dataPoint: { qualifier: 'BegDate', title: 'Begining Date:'}
+  @UI.lineItem: [ {
+    position: 30 ,
+    importance: #MEDIUM,
+    label: ''
+  } ]
+  @UI.identification: [ {
+    position: 30 ,
+    label: ''
+  } ]
+  @UI.fieldGroup: [{
+    qualifier: 'DateTimeData',
+    position: 10
+  } ]  
+  BegDate;
+
+  @UI.dataPoint: { qualifier: 'BegTime', title: 'Begining Time:'}
+  @UI.lineItem: [ {
+    position: 40 ,
+    importance: #MEDIUM,
+    label: ''
+  } ]
+  @UI.identification: [ {
+    position: 40 ,
+    label: ''
+  } ]
+  @UI.fieldGroup: [{
+    qualifier: 'DateTimeData',
+    position: 20
+  } ]    
+  BegTime;
+
+  @UI.dataPoint: { qualifier: 'EndDate', title: 'End Date:'}
+  @UI.lineItem: [ {
+    position: 50 ,
+    importance: #MEDIUM,
+    label: ''
+  } ]
+  @UI.identification: [ {
+    position: 50 ,
+    label: ''
+  } ]
+  @UI.fieldGroup: [{
+    qualifier: 'DateTimeData',
+    position: 30
+  } ]    
+  EndDate;
+  
+  @UI.dataPoint: { qualifier: 'EndTime', title: 'End Time:'}
+  @UI.lineItem: [ {
+    position: 60 ,
+    importance: #MEDIUM,
+    label: ''
+  } ]
+  @UI.identification: [ {
+    position: 60 ,
+    label: ''
+  } ]
+  @UI.fieldGroup: [{
+    qualifier: 'DateTimeData',
+    position: 40
+  } ]    
+  EndTime;
+
+  @UI.lineItem: [ {
+    position: 70 ,
+    importance: #MEDIUM,
+    label: ''
+  } ]
+  @UI.identification: [ {
+    position: 70 ,
+    label: ''
+  } ]
+  @UI.fieldGroup: [{
+    qualifier: 'CustomerData',
+    position: 10
+  } ]    
+  CustID;
+
+  @UI.lineItem: [ {
+  position: 75 ,
+  importance: #MEDIUM,
+  label: ''
+  } ]
+  @UI.identification: [ {
+    position: 75 ,
+    label: ''
+  } ]
+  @UI.fieldGroup: [{
+    qualifier: 'CustomerData',
+    position: 20
+  } ]   
+  CustName;
+
+  @UI.lineItem: [ {
+    position: 80 ,
+    importance: #MEDIUM,
+    label: ''
+  } ]
+  @UI.identification: [ {
+    position: 80 ,
+    label: ''
+  } ]
+  @UI.fieldGroup: [{
+    qualifier: 'ManagerData',
+    position: 10
+  } ]   
+  ManagID;
+
+  @UI.lineItem: [ {
+  position: 85 ,
+  importance: #MEDIUM,
+  label: ''
+  } ]
+  @UI.identification: [ {
+    position: 85 ,
+    label: ''
+  },
+  {
+    type: #FOR_ACTION,
+    dataAction: 'ManagName'
+  } ]
+  @UI.fieldGroup: [{
+    qualifier: 'ManagerData',
+    position: 20
+  } ]     
+  ManagName;
+
+  @UI.dataPoint: { qualifier: 'WeightDeliv', title: 'Weight Delivery:'}
+  @UI.lineItem: [ {
+    position: 90 ,
+    importance: #MEDIUM,
+    label: ''
+  } ]
+  @UI.identification: [ {
+    position: 90 ,
+    label: ''
+  } ]
+  @UI.fieldGroup: [{
+    qualifier: 'BasicData',
+    position: 30
+  } ]  
+  WeightDeliv;
+  
+  @UI.dataPoint:{ qualifier: 'BookStatus', title:'Status', criticality:'Criticality' }
+  @UI.textArrangement: #TEXT_ONLY
+  @UI.lineItem: [ {
+    position: 20 ,
+    importance: #HIGH,
+    criticality:'Criticality', criticalityRepresentation: #WITH_ICON,
+    label: ''
+  } ]
+  @UI.identification: [ {
+    position: 20 ,
+    label: ''
+  } ]
+  @UI.fieldGroup: [{
+    qualifier: 'BasicData',
+    criticality: 'Criticality',    
+    position: 20
+  } ]  
+  BookStatus;
+
+  @UI.hidden: true
+  LocLastChanged;
+}

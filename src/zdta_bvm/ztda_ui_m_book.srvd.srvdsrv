@@ -1,0 +1,23 @@
+@EndUserText.label: 'Service definition forZTDA_C_BOOK'
+define service ZTDA_UI_M_BOOK {
+  expose ZTDA_C_BOOK     as Booking;
+  expose ZTDA_C_TRIP     as Trip;
+  expose ZTDA_C_CAR      as Car;
+  expose ZTDA_C_TRAILLER as Trailler;
+  expose ZTDA_C_EMPL     as Employee;
+  expose ZTDA_C_CUST     as Customer;
+  expose ZTDA_C_BANK     as Bank;
+  expose ZTDA_C_MATNR    as Material;
+  expose ZTDA_C_POS      as Position;
+  expose ZTDA_C_ADDR     as Address;
+  expose ZTDA_C_BRAND    as Brand;
+  expose ZTDA_I_EMPL     as Employee_I;
+  expose ZTDA_I_CAR      as Car_I;
+  expose ZTDA_I_Trailler as Trailler_I;
+  expose ZTDA_I_CUST     as Customer_I;
+  expose ZTDA_I_BANK     as Bank_I;
+  expose ZTDA_I_MATNR    as Material_I;
+  expose ZTDA_I_POS      as Position_I;
+  expose ZTDA_I_ADDR     as Address_I;
+  expose ZTDA_I_BRAND    as Brand_I;
+}

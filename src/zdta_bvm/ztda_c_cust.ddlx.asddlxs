@@ -1,0 +1,135 @@
+@Metadata.layer: #CORE
+@UI: {
+  headerInfo: {
+    typeName: 'Customer',
+    typeNamePlural: 'Customers',
+    title: { type: #STANDARD, label: 'Customer Name', value: 'CustName' }
+  }
+}
+annotate view ZTDA_I_CUST with
+{
+
+  @UI.facet: [ { id: 'Customer', purpose: #STANDARD, type: #COLLECTION,
+                label: 'Customer info', position: 10 },
+              { id: 'General', purpose: #STANDARD, type: #IDENTIFICATION_REFERENCE,
+                parentId: 'Customer', label: 'Customer info', position: 10 },
+
+            { id: 'Bank', 
+              purpose: #STANDARD, 
+              type: #LINEITEM_REFERENCE,
+              label: 'Bank info', 
+              position: 20, 
+              targetElement: '_Bank'},
+              
+            { id: 'AddressInfo', 
+              purpose: #STANDARD, 
+              type: #LINEITEM_REFERENCE,
+              label: 'Address info', 
+              position: 30, 
+              targetElement: '_Address'}
+              
+//              { id: 'Bank', purpose: #STANDARD, type: #LINEITEM_REFERENCE,
+//                label: 'Bank info', position: 20, targetElement: '_Bank'},
+//              { id: 'Address', purpose: #STANDARD, type: #LINEITEM_REFERENCE,
+//                label: 'Address info', position: 30, targetElement: '_Address'}
+  //              { id: 'DateCr', purpose: #STANDARD, type: #FIELDGROUP_REFERENCE,
+  //                parentId: 'Employee', label: 'Created', position: 40,
+  //                targetQualifier: 'DateCrGroup' },
+  //              { id: 'DateChg', purpose: #STANDARD, type: #FIELDGROUP_REFERENCE,
+  //                parentId: 'Employee', label: 'Changed', position: 50,
+  //                targetQualifier: 'DateChgGroup' }
+             ]
+  @UI.hidden: true
+  UUID;
+
+  @UI.lineItem: [ {
+    position: 10 ,
+    importance: #MEDIUM,
+    label: ''
+  } ]
+  @UI.identification: [ {
+    position: 10 ,
+    label: ''
+  } ]
+  ID;
+
+  @UI.lineItem: [ {
+    position: 20 ,
+    importance: #MEDIUM,
+    label: ''
+  } ]
+  @UI.identification: [ {
+    position: 20 ,
+    label: ''
+  } ]
+  Inn;
+
+  @UI.lineItem: [ {
+    position: 30 ,
+    importance: #MEDIUM,
+    label: ''
+  } ]
+  @UI.identification: [ {
+    position: 30 ,
+    label: ''
+  } ]
+  Kpp;
+
+  @UI.lineItem: [ {
+    position: 40 ,
+    importance: #MEDIUM,
+    label: ''
+  } ]
+  @UI.identification: [ {
+    position: 40 ,
+    label: ''
+  } ]
+  AddrID;
+
+  @UI.lineItem: [ {
+    position: 50 ,
+    importance: #MEDIUM,
+    label: ''
+  } ]
+  @UI.identification: [ {
+    position: 50 ,
+    label: ''
+  } ]
+  BankID;
+
+  @UI.lineItem: [ {
+  position: 60 ,
+  importance: #MEDIUM,
+  label: ''
+  } ]
+  @UI.identification: [ {
+    position: 60 ,
+    label: ''
+  } ]
+  BankName;
+
+  @UI.lineItem: [ {
+    position: 70 ,
+    importance: #MEDIUM,
+    label: ''
+  } ]
+  @UI.identification: [ {
+    position: 70 ,
+    label: ''
+  } ]
+  Acc;
+
+  @UI.lineItem: [ {
+    position: 80 ,
+    importance: #MEDIUM,
+    label: ''
+  } ]
+  @UI.identification: [ {
+    position: 80 ,
+    label: ''
+  } ]
+  CustName;
+
+  @UI.hidden: true
+  LocLastChanged;
+}

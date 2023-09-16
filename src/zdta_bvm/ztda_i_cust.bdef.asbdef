@@ -1,0 +1,47 @@
+managed implementation in class ztda_cl_cust unique;
+strict ( 1 );
+with draft;
+
+define behavior for ZTDA_I_CUST alias Customer
+persistent table ztda_a_cust
+draft table ztda_d_cust
+etag master LocLastChanged
+lock master total etag LastChanged
+authorization master ( global )
+
+{
+  field ( readonly )
+  UUID,
+  BankName,
+  LastChanged,
+  LocLastChanged;
+
+  field ( numbering : managed )
+  UUID;
+
+  field ( mandatory : create , readonly : update )
+  ID;
+
+  create;
+  update;
+  delete;
+
+  draft action Edit;
+  draft action Activate;
+  draft action Discard;
+  draft action Resume;
+  draft determine action Prepare;
+  mapping for ztda_a_cust
+    {
+      UUID           = uuid;
+      ID             = id;
+      Inn            = inn;
+      Kpp            = kpp;
+      AddrID         = addr_id;
+      BankID         = bank_id;
+      Acc            = acc;
+      CustName       = cust_name;
+      LocLastChanged = loc_last_changed;
+      LastChanged    = last_changed;
+    }
+ }

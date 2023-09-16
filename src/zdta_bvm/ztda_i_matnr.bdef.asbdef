@@ -1,0 +1,51 @@
+managed implementation in class ztda_cl_matnr unique;
+strict ( 1 );
+with draft;
+
+define behavior for ZTDA_I_MATNR alias Material
+persistent table ztda_a_matnr
+draft table ztda_d_matnr
+etag master LocLastChanged
+lock master total etag LastChanged
+authorization master ( global )
+
+{
+  field ( readonly )
+  UUID,
+  BrandName,
+  ImgURL,
+  LastChanged,
+  LocLastChanged;
+
+  field ( mandatory : create )
+  ID;
+
+  field ( numbering : managed )
+  UUID;
+
+
+  create;
+  update;
+  delete;
+
+  draft action Edit;
+  draft action Activate;
+  draft action Discard;
+  draft action Resume;
+  draft determine action Prepare;
+  mapping for ztda_a_matnr
+    {
+      UUID           = uuid;
+      ID             = id;
+      Articul        = articul;
+      BrandID        = brand_id;
+      MatnrName      = matnr_name;
+      MatnrType      = matnr_type;
+      Okei           = okei;
+      CurrencyCode   = currency_code;
+      Price          = price;
+      LocLastChanged = loc_last_changed;
+      LastChanged    = last_changed;
+    }
+
+}

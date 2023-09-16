@@ -1,0 +1,19 @@
+projection implementation in class ztda_cl_empl unique;
+strict ( 1 );
+use draft;
+
+define behavior for ZTDA_C_EMPL alias Employee
+use etag
+
+{
+
+  use create;
+  use update;
+  use delete;
+
+  use action Edit;
+  use action Activate;
+  use action Discard;
+  use action Resume;
+  use action Prepare;
+}

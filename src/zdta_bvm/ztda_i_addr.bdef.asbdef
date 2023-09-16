@@ -1,0 +1,53 @@
+managed implementation in class ztda_cl_addr unique;
+strict ( 1 );
+with draft;
+
+define behavior for ZTDA_I_ADDR alias Address
+persistent table ztda_a_addr
+draft table ztda_d_addr
+etag master LocLastChanged
+lock master total etag LastChanged
+authorization master ( global )
+
+{
+  create;
+  update;
+  delete;
+
+    // Field options
+  field ( readonly, numbering : managed )
+  UUID;
+  field ( readonly )
+  AddrPoolUUID,
+  ID,
+  LastChanged,
+  LocLastChanged;
+
+  // Determinations
+  determination get_keys on save { create; }
+
+  draft action Edit;
+  draft action Activate;
+  draft action Discard;
+  draft action Resume;
+  draft determine action Prepare;
+  mapping for ztda_a_addr
+    {
+      UUID           = uuid;
+      ID             = id;
+      PostCode       = post_code;
+      CountryCode    = country_code;
+      Region         = region;
+      City           = city;
+      Street         = street;
+      Building       = building;
+      Block          = block;
+      Apartment      = apartment;
+      Phone          = phone;
+      Email          = email;
+      GPSPos         = gps_pos;
+      Distance       = distance;
+      LocLastChanged = loc_last_changed;
+      LastChanged    = last_changed;
+    }
+}

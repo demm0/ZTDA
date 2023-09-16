@@ -1,0 +1,44 @@
+managed implementation in class ztda_cl_pos unique;
+strict ( 1 );
+with draft;
+
+define behavior for ZTDA_I_POS alias Position
+persistent table ztda_a_pos
+draft table ztda_d_pos
+etag master LocLastChanged
+lock master total etag LastChanged
+authorization master ( global )
+
+{
+  field ( readonly )
+  UUID,
+  LastChanged,
+  LocLastChanged;
+
+  field ( numbering : managed )
+  UUID;
+
+  field ( mandatory : create , readonly : update )
+  ID;
+
+  create;
+  update;
+  delete;
+
+  draft action Edit;
+  draft action Activate;
+  draft action Discard;
+  draft action Resume;
+  draft determine action Prepare;
+  mapping for ztda_a_pos
+    {
+      UUID           = uuid;
+      ID             = id;
+      PosName        = pos_name;
+      CurrencyCode   = currency_code;
+      Salary         = salary;
+      LocLastChanged = loc_last_changed;
+      LastChanged    = last_changed;
+    }
+
+}

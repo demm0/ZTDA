@@ -1,0 +1,73 @@
+@Metadata.layer: #CORE
+@UI: {
+  headerInfo: {
+    typeName: 'Position', 
+    typeNamePlural: 'Positions',
+    title: { type: #STANDARD, label: 'PosName', value: 'PosName' } 
+  }
+}
+annotate view ZTDA_I_POS with
+{
+  @UI.facet: [ { id: 'Position', purpose: #STANDARD, type: #COLLECTION,
+                label: 'Position info', position: 10 },
+              { id: 'General', purpose: #STANDARD, type: #IDENTIFICATION_REFERENCE,
+                parentId: 'Position', label: 'Position info', position: 10 }
+
+  //               { id: 'DateCr', purpose: #STANDARD, type: #FIELDGROUP_REFERENCE,
+  //                 parentId: 'Employee', label: 'Created', position: 20,
+  //                 targetQualifier: 'DateCrGroup' },
+  //               { id: 'DateChg', purpose: #STANDARD, type: #FIELDGROUP_REFERENCE,
+  //                 parentId: 'Employee', label: 'Changed', position: 30,
+  //                 targetQualifier: 'DateChgGroup' }
+             ]
+  @UI.hidden: true
+  UUID;
+  
+  @UI.lineItem: [ {
+    position: 10 , 
+    importance: #MEDIUM, 
+    label: ''
+  } ]
+  @UI.identification: [ {
+    position: 10 , 
+    label: ''
+  } ]
+  ID;
+  
+  @UI.lineItem: [ {
+    position: 20 , 
+    importance: #MEDIUM, 
+    label: ''
+  } ]
+  @UI.identification: [ {
+    position: 20 , 
+    label: ''
+  } ]
+  PosName;
+  
+  @UI.lineItem: [ {
+    position: 30 , 
+    importance: #MEDIUM, 
+    label: ''
+  } ]
+  @UI.identification: [ {
+    position: 30 , 
+    label: ''
+  } ]
+  @UI.hidden: true  
+  CurrencyCode;
+  
+  @UI.lineItem: [ {
+    position: 40 , 
+    importance: #MEDIUM, 
+    label: ''
+  } ]
+  @UI.identification: [ {
+    position: 40 , 
+    label: ''
+  } ]
+  Salary;
+  
+  @UI.hidden: true
+  LocLastChanged;
+}

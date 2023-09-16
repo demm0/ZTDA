@@ -1,0 +1,44 @@
+managed implementation in class ZTDA_CL_BRAND unique;
+strict ( 1 );
+with draft;
+
+define behavior for ZTDA_I_BRAND alias Brand
+persistent table ztda_a_brand
+draft table ztda_d_brand
+etag master LocLastChanged
+lock master total etag LastChanged
+authorization master ( global )
+
+{
+  field ( readonly )
+  UUID,
+  ID,
+  LastChanged,
+  LocLastChanged;
+
+  field ( numbering : managed )
+  UUID;
+
+  // Determinations
+  determination calc_default_data on save { create; }
+
+  create;
+  update;
+  delete;
+
+  draft action Edit;
+  draft action Activate optimized;
+  draft action Discard;
+  draft action Resume;
+  draft determine action Prepare;
+
+  mapping for ztda_a_brand
+    {
+      UUID           = uuid;
+      ID             = id;
+      BrandName      = brand_name;
+      Imgurl         = imgurl;
+      LocLastChanged = loc_last_changed;
+      LastChanged    = last_changed;
+    }
+}

@@ -1,0 +1,80 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_MSAG" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <T100A>
+    <ARBGB>ZTDA_BVM_MSG</ARBGB>
+    <MASTERLANG>E</MASTERLANG>
+    <STEXT>Message class for BVM</STEXT>
+   </T100A>
+   <T100>
+    <T100>
+     <SPRSL>E</SPRSL>
+     <ARBGB>ZTDA_BVM_MSG</ARBGB>
+     <MSGNR>000</MSGNR>
+     <TEXT>&amp;1&amp;2&amp;3&amp;4</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>E</SPRSL>
+     <ARBGB>ZTDA_BVM_MSG</ARBGB>
+     <MSGNR>001</MSGNR>
+     <TEXT>&amp;1 &amp;2 &amp;3 &amp;4</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>E</SPRSL>
+     <ARBGB>ZTDA_BVM_MSG</ARBGB>
+     <MSGNR>002</MSGNR>
+     <TEXT>&amp;1, &amp;2, &amp;3, &amp;4</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>E</SPRSL>
+     <ARBGB>ZTDA_BVM_MSG</ARBGB>
+     <MSGNR>003</MSGNR>
+     <TEXT>&apos;&amp;1&apos; is not known.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>E</SPRSL>
+     <ARBGB>ZTDA_BVM_MSG</ARBGB>
+     <MSGNR>004</MSGNR>
+     <TEXT>Value &apos;&amp;1&apos; is not known for field &apos;&amp;2&apos;.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>E</SPRSL>
+     <ARBGB>ZTDA_BVM_MSG</ARBGB>
+     <MSGNR>005</MSGNR>
+     <TEXT>Value of the field &quot;ID = &amp;1&quot; does not satisfy the interval from &amp;2 to &amp;3.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>E</SPRSL>
+     <ARBGB>ZTDA_BVM_MSG</ARBGB>
+     <MSGNR>006</MSGNR>
+     <TEXT>Value of the field &quot;ID = &amp;1&quot; does not exist in table &amp;2.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>E</SPRSL>
+     <ARBGB>ZTDA_BVM_MSG</ARBGB>
+     <MSGNR>007</MSGNR>
+     <TEXT>Value of the field &quot;ID = &amp;1&quot; is not the position of the &apos;Manager&apos;</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>E</SPRSL>
+     <ARBGB>ZTDA_BVM_MSG</ARBGB>
+     <MSGNR>008</MSGNR>
+     <TEXT>End date lesser than begining date</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>E</SPRSL>
+     <ARBGB>ZTDA_BVM_MSG</ARBGB>
+     <MSGNR>009</MSGNR>
+     <TEXT>Begining date bigger than currently date</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>E</SPRSL>
+     <ARBGB>ZTDA_BVM_MSG</ARBGB>
+     <MSGNR>010</MSGNR>
+     <TEXT>The booking can&apos;t be close. status of some trip isn&apos;t suitable.</TEXT>
+    </T100>
+   </T100>
+  </asx:values>
+ </asx:abap>
+</abapGit>

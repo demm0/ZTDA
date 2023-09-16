@@ -1,0 +1,448 @@
+@Metadata.layer: #CORE
+@UI: {
+  headerInfo: {
+    typeName: 'Trip',
+    typeNamePlural: 'Trips',
+    title: { type: #STANDARD, label: 'Trip ID', value: 'TripID' }
+  },
+  
+      chart: [ 
+               { qualifier: 'TripWeight',
+                 title: 'Weight',
+                 chartType: #DONUT,
+                 dimensions: ['TripID'],
+                 measures: ['Weight'],
+                 measureAttributes: [{ measure: 'Weight', role: #AXIS_1 }],
+                 dimensionAttributes: [{ dimension: 'TripID', role: #CATEGORY }],
+                 description: 'Weight' 
+               }]
+               
+//              {  qualifier: 'TripWeight',
+//                 title: 'Weight',
+//                 chartType: #BAR_DUAL,
+//                 dimensions: ['TripID'],
+//                 measures: ['Weight' ],
+//                 measureAttributes: [{ measure: 'Weight', role: #AXIS_1 }],
+//                 dimensionAttributes: [{ dimension: 'TripID', role: #CATEGORY }],
+//                 description: 'Weight' 
+//               }]
+           }
+annotate view ZTDA_C_TRIP with
+{
+  @UI.facet: [
+
+
+  //            { id: 'TripID',
+  //              purpose: #HEADER,
+  //              type: #DATAPOINT_REFERENCE,
+  //              position: 10,
+  //              targetQualifier: 'TripID'
+  //             },
+
+
+            { id: 'TripStatus',
+              purpose: #HEADER,
+              type: #DATAPOINT_REFERENCE,
+              position: 20,
+              targetQualifier: 'TripStatus'
+             },
+
+
+            { id: 'BegDate',
+              purpose: #HEADER,
+              type: #DATAPOINT_REFERENCE,
+              position: 30,
+              targetQualifier: 'BegDate'
+             },
+
+
+            { id: 'BegTime',
+              purpose: #HEADER,
+              type: #DATAPOINT_REFERENCE,
+              position: 40,
+              targetQualifier: 'BegTime'
+             },
+
+            { id: 'EndDate',
+              purpose: #HEADER,
+              type: #DATAPOINT_REFERENCE,
+              position: 50,
+              targetQualifier: 'EndDate'
+             },
+
+
+            { id: 'EndTime',
+              purpose: #HEADER,
+              type: #DATAPOINT_REFERENCE,
+              position: 60,
+              targetQualifier: 'EndTime'
+             },
+
+
+            { id: 'GeneralInfo',
+              purpose: #STANDARD,
+              label: 'General Information',
+              type: #COLLECTION,
+              position: 10
+             },
+
+            { id: 'BasicData',
+              purpose: #STANDARD,
+              type: #FIELDGROUP_REFERENCE,
+              parentId: 'GeneralInfo',
+              label: 'Basic Data',
+              position: 10,
+              targetQualifier: 'BasicData'
+             },
+
+            { id: 'DateTimeData',
+              purpose: #STANDARD,
+              type: #FIELDGROUP_REFERENCE,
+              parentId: 'GeneralInfo',
+              label: 'Data/Time',
+              position: 20,
+              targetQualifier: 'DateTimeData'
+             },
+
+            { id: 'MaterialData',
+              purpose: #STANDARD,
+              type: #FIELDGROUP_REFERENCE,
+              parentId: 'GeneralInfo',
+              label: 'Material Data',
+              position: 30,
+              targetQualifier: 'MaterialData'
+             },
+
+            { id: 'TransportData',
+              purpose: #STANDARD,
+              type: #FIELDGROUP_REFERENCE,
+              parentId: 'GeneralInfo',
+              label: 'Transport Data',
+              position: 40,
+              targetQualifier: 'TransportData'
+             },
+             
+            { id: 'DriverData',
+              purpose: #STANDARD,
+              type: #FIELDGROUP_REFERENCE,
+              parentId: 'GeneralInfo',
+              label: 'Driver Data',
+              position: 50,
+              targetQualifier: 'DriverData'
+             },
+             
+
+
+  //  @UI.facet: [ { id: 'Trip', purpose: #STANDARD, type: #COLLECTION,
+  //                label: 'Trip', position: 10 },
+  //              { id: 'General', purpose: #STANDARD, type: #IDENTIFICATION_REFERENCE,
+  //                parentId: 'Trip', label: 'Trip info', position: 10 },
+
+              { id: 'Material',
+                purpose: #STANDARD,
+                type: #LINEITEM_REFERENCE,
+                label: 'Material info',
+                position: 20,
+                targetElement: '_Material'
+               },
+
+
+              { id: 'Employee',
+                purpose: #STANDARD,
+                type: #LINEITEM_REFERENCE,
+                label: 'Driver info',
+                position: 30,
+                targetElement: '_Employee'
+               },
+
+
+              { id: 'Car',
+                purpose: #STANDARD,
+                type: #LINEITEM_REFERENCE,
+                label: 'Car info',
+                position: 40,
+                targetElement: '_Car'
+               },
+
+
+              { id: 'Trailler',
+                purpose: #STANDARD,
+                type: #LINEITEM_REFERENCE,
+                label: 'Trailler info',
+                position: 50,
+                targetElement: '_Trailler'
+               }
+               
+               
+  //              { id: 'Address',
+  //                purpose: #STANDARD,
+  //                type: #LINEITEM_REFERENCE,
+  //                label: 'Address info',
+  //                position: 60,
+  //                targetElement: '_Address'
+  //               }
+
+
+  //              { id: 'DateCr',
+  //                purpose: #STANDARD,
+  //                type: #FIELDGROUP_REFERENCE,
+  //                parentId: 'Trip',
+  //                label: 'Created',
+  //                position: 70,
+  //                targetQualifier: 'DateCrGroup'
+  //               },
+
+  //              { id: 'DateChg',
+  //                purpose: #STANDARD,
+  //                type: #FIELDGROUP_REFERENCE,
+  //                parentId: 'Trip',
+  //                label: 'Changed',
+  //                position: 80,
+  //                targetQualifier: 'DateChgGroup'
+  //                }
+             ]
+  @UI.lineItem: [{ type: #FOR_ACTION,position: 5, dataAction: 'EndTrip',  label: 'Close Trip' }]
+  @UI.hidden: true
+  UUID;
+
+  @UI.hidden: true
+  BookUUID;
+
+  @UI.dataPoint: { qualifier: 'TripID', title: 'Trip ID:'}
+  @UI.lineItem: [ {
+    position: 10 ,
+    importance: #MEDIUM,
+    label: ''
+  } ]
+  @UI.identification: [ {
+    position: 10 ,
+    label: ''
+  } ]
+  @UI.fieldGroup: [{
+    qualifier: 'BasicData',
+    position: 10
+  } ]
+  TripID;
+
+  @UI.lineItem: [ {
+    position: 30 ,
+    importance: #MEDIUM,
+    label: ''
+  } ]
+  @UI.identification: [ {
+    position: 30 ,
+    label: ''
+  } ]
+  @UI.fieldGroup: [{
+    qualifier: 'BasicData',
+    position: 20
+  } ]
+  TripNumber;
+
+  @UI.dataPoint: { qualifier: 'BegDate', title: 'Begining Date:'}
+  @UI.lineItem: [ {
+    position: 40 ,
+    importance: #MEDIUM,
+    label: ''
+  } ]
+  @UI.identification: [ {
+    position: 40 ,
+    label: ''
+  } ]
+  @UI.fieldGroup: [{
+    qualifier: 'DateTimeData',
+    position: 10
+  } ]
+  BegDate;
+
+  @UI.dataPoint: { qualifier: 'BegTime', title: 'Begining Time:'}
+  @UI.lineItem: [ {
+    position: 50 ,
+    importance: #MEDIUM,
+    label: ''
+  } ]
+  @UI.identification: [ {
+    position: 50 ,
+    label: ''
+  } ]
+  @UI.fieldGroup: [{
+    qualifier: 'DateTimeData',
+    position: 20
+  } ]
+  BegTime;
+
+  @UI.dataPoint: { qualifier: 'EndDate', title: 'End Date:'}
+  @UI.lineItem: [ {
+    position: 70 ,
+    importance: #MEDIUM,
+    label: ''
+  } ]
+  @UI.identification: [ {
+    position: 70 ,
+    label: ''
+  } ]
+  @UI.fieldGroup: [{
+    qualifier: 'DateTimeData',
+    position: 30
+  } ]
+  EndDate;
+
+  @UI.dataPoint: { qualifier: 'EndTime', title: 'End Time:'}
+  @UI.lineItem: [ {
+    position: 80 ,
+    importance: #MEDIUM,
+    label: ''
+  } ]
+  @UI.identification: [ {
+    position: 80 ,
+    label: ''
+  } ]
+  @UI.fieldGroup: [{
+    qualifier: 'DateTimeData',
+    position: 40
+  } ]
+  EndTime;
+
+  @UI.lineItem: [ {
+    position: 100 ,
+    importance: #MEDIUM,
+    label: ''
+  } ]
+  @UI.identification: [ {
+    position: 100 ,
+    label: ''
+  } ]
+  @UI.fieldGroup: [{
+    qualifier: 'MaterialData',
+    position: 10
+  } ]
+  MaterialID;
+
+  @UI.lineItem: [ {
+    position: 110 ,
+    importance: #MEDIUM,
+    label: ''
+  } ]
+  @UI.identification: [ {
+    position: 110 ,
+    label: ''
+  } ]
+  @UI.fieldGroup: [{
+    qualifier: 'MaterialData',
+    position: 20
+  } ]
+  MaterialName;
+
+  @UI.lineItem: [ {
+    position: 90 ,
+    importance: #MEDIUM,
+    label: ''
+  } ]
+  @UI.identification: [ {
+    position: 90 ,
+    label: ''
+  } ]
+  @UI.fieldGroup: [{
+    qualifier: 'MaterialData',
+    position: 30
+  } ]
+  Weight;
+
+  //  @UI.lineItem: [ {
+  //    position: 120 ,
+  //    importance: #MEDIUM,
+  //    label: ''
+  //  } ]
+  //  @UI.identification: [ {
+  //    position: 120 ,
+  //    label: ''
+  //  } ]
+  //  AddressID;
+
+  @UI.lineItem: [ {
+    position: 130 ,
+    importance: #MEDIUM,
+    label: ''
+  } ]
+  @UI.identification: [ {
+    position: 130 ,
+    label: ''
+  } ]
+  @UI.fieldGroup: [{
+    qualifier: 'DriverData',
+    position: 10
+  } ]
+  DriverID;
+
+  @UI.lineItem: [ {
+  position: 140 ,
+  importance: #MEDIUM,
+
+  label: ''
+  } ]
+  @UI.identification: [ {
+    position: 140 ,
+    label: ''
+  },
+  {
+    type: #FOR_ACTION,
+    dataAction: 'DriverName'
+  } ]
+  @UI.fieldGroup: [{
+    qualifier: 'DriverData',
+    position: 20
+  } ]
+  DriverName;
+
+  @UI.lineItem: [ {
+    position: 150 ,
+    importance: #MEDIUM,
+    label: ''
+  } ]
+  @UI.identification: [ {
+    position: 150 ,
+    label: ''
+  } ]
+  @UI.fieldGroup: [{
+    qualifier: 'TransportData',
+    position: 10
+  } ]
+  CarID;
+
+  @UI.lineItem: [ {
+    position: 160 ,
+    importance: #MEDIUM,
+    label: ''
+  } ]
+  @UI.identification: [ {
+    position: 160 ,
+    label: ''
+  } ]
+  @UI.fieldGroup: [{
+    qualifier: 'TransportData',
+    position: 20
+  } ]
+  TraillerID;
+
+  @UI.dataPoint:{ qualifier: 'TripStatus', title:'Status', criticality:'Criticality' }
+  @UI.textArrangement: #TEXT_LAST
+  @UI.lineItem: [ {
+    position: 60 ,
+    importance: #HIGH,
+    criticality:'Criticality', criticalityRepresentation: #WITH_ICON,
+    label: ''
+  } ]
+  @UI.identification: [ {
+    position: 60 ,
+    label: ''
+  } ]
+  @UI.fieldGroup: [{
+    qualifier: 'BasicData',
+    position:30,
+    criticality: 'Criticality'
+    } ]
+  TripStatus;
+
+  @UI.hidden: true
+  LocLastChanged;
+}

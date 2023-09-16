@@ -1,0 +1,15 @@
+CLASS ztda_cl_book DEFINITION
+  PUBLIC
+  ABSTRACT
+  FINAL
+  FOR BEHAVIOR OF ztda_i_book.
+
+  PUBLIC SECTION.
+protected section.
+private section.
+ENDCLASS.
+
+
+
+CLASS ZTDA_CL_BOOK IMPLEMENTATION.
+ENDCLASS.

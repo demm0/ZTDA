@@ -1,0 +1,146 @@
+@Metadata.layer: #CORE
+@UI: {
+  headerInfo: {
+    typeName: 'Material',
+    typeNamePlural: 'Materials',
+    imageUrl: 'ImgURL',
+    title: { type: #STANDARD, label: 'MatnrName', value: 'MatnrName' }
+  }
+}
+annotate view ZTDA_I_MATNR with
+{
+  @UI.facet: [ { id: 'Material', purpose: #STANDARD, type: #COLLECTION,
+                label: 'Material info', position: 10 },
+              { id: 'General', purpose: #STANDARD, type: #IDENTIFICATION_REFERENCE,
+                parentId: 'Material', label: 'Material info', position: 10 }
+
+  //               { id: 'DateCr', purpose: #STANDARD, type: #FIELDGROUP_REFERENCE,
+  //                 parentId: 'Employee', label: 'Created', position: 20,
+  //                 targetQualifier: 'DateCrGroup' },
+  //               { id: 'DateChg', purpose: #STANDARD, type: #FIELDGROUP_REFERENCE,
+  //                 parentId: 'Employee', label: 'Changed', position: 30,
+  //                 targetQualifier: 'DateChgGroup' }
+             ]
+  @UI.hidden: true
+  UUID;
+
+  @UI.dataPoint:{
+  qualifier: 'ImgURL'
+  }
+  @UI.lineItem: [ {
+  position: 10 ,
+  importance: #MEDIUM,
+  label: ''
+  } ]
+  @UI.identification: [ {
+    position: 10 ,
+    label: ''
+  } ]
+  //  @UI.fieldGroup: [{
+  //    qualifier: 'BasicData',
+  //    position: 10
+  //  } ]
+  ImgURL;
+
+  @UI.lineItem: [ {
+    position: 10 ,
+    importance: #MEDIUM,
+    label: ''
+  } ]
+  @UI.identification: [ {
+    position: 10 ,
+    label: ''
+  } ]
+  ID;
+
+  @UI.lineItem: [ {
+    position: 20 ,
+    importance: #MEDIUM,
+    label: ''
+  } ]
+  @UI.identification: [ {
+    position: 20 ,
+    label: ''
+  } ]
+  Articul;
+
+  @UI.lineItem: [ {
+  position: 23 ,
+  importance: #MEDIUM,
+  label: ''
+  } ]
+  @UI.identification: [ {
+    position: 23 ,
+    label: ''
+  } ]
+  BrandID;
+
+  @UI.lineItem: [ {
+    position: 25 ,
+    importance: #MEDIUM,
+    label: ''
+  } ]
+  @UI.identification: [ {
+    position: 25 ,
+    label: ''
+  } ]
+  BrandName;
+
+  @UI.lineItem: [ {
+    position: 30 ,
+    importance: #MEDIUM,
+    label: ''
+  } ]
+  @UI.identification: [ {
+    position: 30 ,
+    label: ''
+  } ]
+  MatnrName;
+
+  @UI.lineItem: [ {
+    position: 40 ,
+    importance: #MEDIUM,
+    label: ''
+  } ]
+  @UI.identification: [ {
+    position: 40 ,
+    label: ''
+  } ]
+  MatnrType;
+
+  @UI.lineItem: [ {
+    position: 50 ,
+    importance: #MEDIUM,
+    label: ''
+  } ]
+  @UI.identification: [ {
+    position: 50 ,
+    label: ''
+  } ]
+  OKEI;
+
+  @UI.lineItem: [ {
+    position: 60 ,
+    importance: #MEDIUM,
+    label: ''
+  } ]
+  @UI.identification: [ {
+    position: 60 ,
+    label: ''
+  } ]
+  @UI.hidden: true
+  CurrencyCode;
+
+  @UI.lineItem: [ {
+    position: 70 ,
+    importance: #MEDIUM,
+    label: ''
+  } ]
+  @UI.identification: [ {
+    position: 70 ,
+    label: ''
+  } ]
+  Price;
+  @UI.hidden: true
+  LocLastChanged;
+}
