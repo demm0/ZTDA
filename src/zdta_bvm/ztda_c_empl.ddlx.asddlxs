@@ -1,30 +1,30 @@
 @Metadata.layer: #CORE
-//@UI: {
-//  headerInfo: {
-//    typeName: 'Employee',
-//    typeNamePlural: 'Employees',
-//    title: { type: #STANDARD, label: 'Surame', value: 'Surname' }
-//  }
-//}
+@UI: {
+  headerInfo: {
+    typeName: 'Employee',
+    typeNamePlural: 'Employees',
+    title: { type: #STANDARD, label: 'ID', value: 'ID' }
+  }
+}
 annotate view ZTDA_I_EMPL with
 {
 
   @UI.facet: [
   
   
-             { id: 'ID',
-              purpose: #HEADER,
-              type: #DATAPOINT_REFERENCE,
-              position: 10,
-              targetQualifier: 'ID'
-             },
-             
-             { id: 'PositionName',
-              purpose: #HEADER,
-              type: #DATAPOINT_REFERENCE,
-              position: 20,
-              targetQualifier: 'PositionName'
-             },
+//             { id: 'ID',
+//              purpose: #HEADER,
+//              type: #DATAPOINT_REFERENCE,
+//              position: 10,
+//              targetQualifier: 'ID'
+//             },
+//             
+//             { id: 'PositionName',
+//              purpose: #HEADER,
+//              type: #DATAPOINT_REFERENCE,
+//              position: 20,
+//              targetQualifier: 'PositionName'
+//             },
              
             { id: 'Surname',
               purpose: #HEADER,
@@ -46,20 +46,6 @@ annotate view ZTDA_I_EMPL with
               position: 50,
               targetQualifier: 'PatronycName'
              },
-
-            { id: 'BegDate',
-              purpose: #HEADER,
-              type: #DATAPOINT_REFERENCE,
-              position: 60,
-              targetQualifier: 'BegDate'
-             },
-
-            { id: 'EndDate',
-              purpose: #HEADER,
-              type: #DATAPOINT_REFERENCE,
-              position: 70,
-              targetQualifier: 'EndDate'
-             },
              
              
 
@@ -80,32 +66,36 @@ annotate view ZTDA_I_EMPL with
                 position: 10
                 },
 
-            { id: 'BasicData',
-              purpose: #STANDARD,
-              type: #FIELDGROUP_REFERENCE,
-              parentId: 'GeneralInfo',
-              label: 'Basic Data',
-              position: 10,
-              targetQualifier: 'BasicData'
-             },
+//            { id: 'BasicData',
+//              purpose: #STANDARD,
+//              type: #FIELDGROUP_REFERENCE,
+//              parentId: 'GeneralInfo',
+//              label: 'Basic Data',
+//              position: 10,
+//              targetQualifier: 'BasicData'
+//             },
 
-            { id: 'DateTimeData',
-              purpose: #STANDARD,
-              type: #FIELDGROUP_REFERENCE,
-              parentId: 'GeneralInfo',
-              label: 'Data/Time',
-              position: 20,
-              targetQualifier: 'DateTimeData'
-             },
 
             { id: 'PersonalData',
               purpose: #STANDARD,
               type: #FIELDGROUP_REFERENCE,
               parentId: 'GeneralInfo',
               label: 'Personal Data',
-              position: 30,
+              position: 20,
               targetQualifier: 'PersonalData'
              },
+             
+             
+            { id: 'DateTimeData',
+              purpose: #STANDARD,
+              type: #FIELDGROUP_REFERENCE,
+              parentId: 'GeneralInfo',
+              label: 'Data/Time',
+              position: 30,
+              targetQualifier: 'DateTimeData'
+             },
+
+
              
              
 
@@ -154,11 +144,11 @@ annotate view ZTDA_I_EMPL with
   } ]
   ID;
 
-  @UI.lineItem: [ {
-  position: 20 ,
-  importance: #MEDIUM,
-  label: ''
-  } ]
+//  @UI.lineItem: [ {
+//  position: 20 ,
+//  importance: #MEDIUM,
+//  label: ''
+//  } ]
   @UI.identification: [ {
     position: 20 ,
     label: ''
@@ -193,14 +183,14 @@ annotate view ZTDA_I_EMPL with
     importance: #MEDIUM,
     label: ''
   } ]
-  @UI.identification: [ {
-    position: 30 ,
-    label: ''
-  } ]
-  @UI.fieldGroup: [{
-  qualifier: 'PersonalData',
-  position: 50
-  } ]
+//  @UI.identification: [ {
+//    position: 30 ,
+//    label: ''
+//  } ]
+//  @UI.fieldGroup: [{
+//  qualifier: 'PersonalData',
+//  position: 50
+//  } ]
   AddressID;
 
   @UI.lineItem: [ {

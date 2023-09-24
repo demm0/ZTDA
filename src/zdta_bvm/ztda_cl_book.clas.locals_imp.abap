@@ -8,10 +8,11 @@ CLASS lhc_booking DEFINITION INHERITING FROM cl_abap_behavior_handler.
     METHODS calc_default_data_book  	FOR DETERMINE ON SAVE IMPORTING   keys FOR Booking~calc_default_data.
     METHODS calc_status_book        	FOR DETERMINE ON SAVE IMPORTING   keys FOR Booking~calc_status.
     METHODS calc_weight              	FOR DETERMINE ON MODIFY IMPORTING keys FOR Booking~calc_Weight.
+    METHODS fill_end_date_book          FOR DETERMINE ON SAVE IMPORTING   keys FOR booking~fill_end_date.
 
     METHODS validate_customer       	FOR VALIDATE ON SAVE IMPORTING keys FOR Booking~validate_Customer.
     METHODS validate_manager        	FOR VALIDATE ON SAVE IMPORTING keys FOR Booking~validate_Manager.
-*    METHODS validate_dates_book     	FOR VALIDATE ON SAVE IMPORTING keys FOR Booking~validate_Dates.
+    METHODS validate_dates_book     	FOR VALIDATE ON SAVE IMPORTING keys FOR Booking~validate_Dates.
 
     METHODS End_Book                 	FOR MODIFY IMPORTING keys FOR ACTION Booking~EndBook RESULT result.
     METHODS get_instance_features_book  FOR INSTANCE FEATURES IMPORTING keys REQUEST requested_features FOR Booking RESULT result.
@@ -30,6 +31,7 @@ CLASS lhc_booking DEFINITION INHERITING FROM cl_abap_behavior_handler.
     METHODS End_Trip                 	FOR MODIFY IMPORTING keys FOR ACTION Trip~EndTrip RESULT result.
     METHODS get_instance_features_trip  FOR INSTANCE FEATURES IMPORTING keys REQUEST requested_features FOR Trip RESULT result.
     METHODS get_global_authorizations   FOR GLOBAL AUTHORIZATION IMPORTING REQUEST requested_authorizations FOR trip RESULT result.
+
 ENDCLASS.
 
 
@@ -41,7 +43,7 @@ CLASS lhc_booking IMPLEMENTATION.
 
   METHOD calc_default_data_book.
     DATA lv_id   TYPE cl_numberrange_runtime=>nr_number.
-    DATA: mapped TYPE RESPONSE FOR MAPPED ztda_i_book.
+    DATA mapped TYPE RESPONSE FOR MAPPED ztda_i_book.
 
     READ ENTITIES OF ztda_i_book
               IN LOCAL MODE ENTITY Booking
@@ -171,41 +173,40 @@ CLASS lhc_booking IMPLEMENTATION.
     ENDLOOP.
   ENDMETHOD.
 
-*  METHOD validate_dates_book.
-*    READ ENTITIES OF ztda_i_book
-*              IN LOCAL MODE ENTITY Booking
-*              FIELDS ( CustID )
-*              WITH CORRESPONDING #( keys )
-*              RESULT DATA(lt_Booking).
-*
-*    LOOP AT lt_Booking INTO DATA(ls_booking).
-*
-*      IF    ls_booking-enddate < ls_booking-begdate                                      "end_date before begin_date
-*        AND ls_booking-enddate IS NOT INITIAL.
-*        APPEND VALUE #( %key             = ls_booking-%key ) TO failed-booking.
-*        APPEND VALUE #( %key             = ls_booking-%key
-*                        %msg             = new_message( id       = ztda_cl_constants=>msgid
-*                                                        number   = ztda_cl_constants=>msgno-no_008
-*                                                        v1       = ls_booking-begdate
-*                                                        v2       = ls_booking-enddate
-*                                                        v3       = ls_booking-id
-*                                                        severity = if_abap_behv_message=>severity-error )
-*                        %element-begdate = if_abap_behv=>mk-on
-*                        %element-enddate = if_abap_behv=>mk-on ) TO reported-booking.
-*
-*      ELSEIF ls_booking-begdate > cl_abap_context_info=>get_system_date( )              "begin_date must be in the future
-*         AND ls_booking-begdate IS NOT INITIAL.
-*        APPEND VALUE #( %key             = ls_booking-%key ) TO failed-booking.
-*        APPEND VALUE #( %key             = ls_booking-%key
-*                        %msg             = new_message( id       = ztda_cl_constants=>msgid
-*                                                        number   = ztda_cl_constants=>msgno-no_009
-*                                                        severity = if_abap_behv_message=>severity-error )
-*                        %element-begdate = if_abap_behv=>mk-on
-*                        %element-enddate = if_abap_behv=>mk-on ) TO reported-booking.
-*      ENDIF.
-*    ENDLOOP.
-*  ENDMETHOD.
+  METHOD validate_dates_book.
+    READ ENTITIES OF ztda_i_book
+              IN LOCAL MODE ENTITY Booking
+              FIELDS ( CustID )
+              WITH CORRESPONDING #( keys )
+              RESULT DATA(lt_Booking).
 
+    LOOP AT lt_Booking INTO DATA(ls_booking).
+
+      IF    ls_booking-enddate < ls_booking-begdate                                      "end_date before begin_date
+        AND ls_booking-enddate IS NOT INITIAL.
+        APPEND VALUE #( %key             = ls_booking-%key ) TO failed-booking.
+        APPEND VALUE #( %key             = ls_booking-%key
+                        %msg             = new_message( id       = ztda_cl_constants=>msgid
+                                                        number   = ztda_cl_constants=>msgno-no_008
+                                                        v1       = ls_booking-begdate
+                                                        v2       = ls_booking-enddate
+                                                        v3       = ls_booking-id
+                                                        severity = if_abap_behv_message=>severity-error )
+                        %element-begdate = if_abap_behv=>mk-on
+                        %element-enddate = if_abap_behv=>mk-on ) TO reported-booking.
+
+      ELSEIF ls_booking-begdate > cl_abap_context_info=>get_system_date( )              "begin_date must be in the future
+         AND ls_booking-begdate IS NOT INITIAL.
+        APPEND VALUE #( %key             = ls_booking-%key ) TO failed-booking.
+        APPEND VALUE #( %key             = ls_booking-%key
+                        %msg             = new_message( id       = ztda_cl_constants=>msgid
+                                                        number   = ztda_cl_constants=>msgno-no_009
+                                                        severity = if_abap_behv_message=>severity-error )
+                        %element-begdate = if_abap_behv=>mk-on
+                        %element-enddate = if_abap_behv=>mk-on ) TO reported-booking.
+      ENDIF.
+    ENDLOOP.
+  ENDMETHOD.
 
 
   METHOD End_Book.
@@ -319,45 +320,87 @@ CLASS lhc_booking IMPLEMENTATION.
 
     result = VALUE #( FOR booking IN lt_booking ( %key   = booking-%key
                                                   %param = booking  ) ).
-
   ENDMETHOD.
+
 
   METHOD get_instance_features_book.
   ENDMETHOD.
+
+
+  METHOD fill_end_date_book.
+    DATA: mapped TYPE RESPONSE FOR MAPPED ztda_i_book.
+
+    READ ENTITIES OF ztda_i_book
+              IN LOCAL MODE ENTITY Booking
+              FIELDS ( uuid id )
+              WITH CORRESPONDING #( keys )
+              RESULT DATA(Create_table).
+
+    LOOP AT Create_table ASSIGNING FIELD-SYMBOL(<New_Record>).
+      <New_Record>-EndDate = '99991231'.
+    ENDLOOP.
+
+    MODIFY ENTITIES OF ztda_i_book
+        IN LOCAL MODE
+        ENTITY Booking
+        UPDATE FROM VALUE #(
+        FOR New_Record IN Create_table INDEX INTO i (
+          %tky          = New_Record-%tky
+          %data         = New_Record-%data
+          %control-id   = if_abap_behv=>mk-on
+          ) )
+        MAPPED mapped
+        FAILED DATA(failed_create)
+        REPORTED DATA(reported_create).
+
+    reported = CORRESPONDING #( DEEP reported_create ).
+  ENDMETHOD.
+
 
 
 
   METHOD calc_default_data_trip.
   ENDMETHOD.
 
+
   METHOD calc_status_trip.
   ENDMETHOD.
+
 
   METHOD end_trip.
   ENDMETHOD.
 
+
   METHOD get_instance_features_trip.
   ENDMETHOD.
+
 
 *  METHOD validate_address.
 *  ENDMETHOD.
 
+
   METHOD validate_car.
   ENDMETHOD.
+
 
 *  METHOD validate_dates_trip.
 *  ENDMETHOD.
 
+
   METHOD validate_driver.
   ENDMETHOD.
+
 
   METHOD validate_material.
   ENDMETHOD.
 
+
   METHOD validate_trailler.
   ENDMETHOD.
 
+
   METHOD get_global_authorizations.
   ENDMETHOD.
+
 
 ENDCLASS.

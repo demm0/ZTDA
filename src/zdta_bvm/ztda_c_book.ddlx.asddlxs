@@ -65,115 +65,90 @@ annotate view ZTDA_C_BOOK with
              },
 
 
-            { id: 'GeneralInfo',
-              purpose: #STANDARD,
-              label: 'General Information',
-              type: #COLLECTION,
-              position: 10
-             },
-
-            { id: 'BasicData',
-              purpose: #STANDARD,
-              type: #FIELDGROUP_REFERENCE,
-              parentId: 'GeneralInfo',
-              label: 'Basic Data',
-              position: 10,
-              targetQualifier: 'BasicData'
-             },
-
-            { id: 'DateTimeData',
-              purpose: #STANDARD,
-              type: #FIELDGROUP_REFERENCE,
-              parentId: 'GeneralInfo',
-              label: 'Data/Time',
-              position: 20,
-              targetQualifier: 'DateTimeData'
-             },
-
-            { id: 'CustomerData',
-              purpose: #STANDARD,
-              type: #FIELDGROUP_REFERENCE,
-              parentId: 'GeneralInfo',
-              label: 'Customer Data',
-              position: 30,
-              targetQualifier: 'CustomerData'
-             },
-
-            { id: 'ManagerData',
-              purpose: #STANDARD,
-              type: #FIELDGROUP_REFERENCE,
-              parentId: 'GeneralInfo',
-              label: 'Manager Data',
-              position: 40,
-              targetQualifier: 'ManagerData'
-             },
-             
 
 
+              { id: 'BookInfo',
+                purpose: #STANDARD,
+                type: #COLLECTION,
+                label: 'Booking info',
+                position: 10
+              },
+
+
+                  { id: 'GeneralInfo',
+                    purpose: #STANDARD,
+                    type: #COLLECTION,
+                    parentId: 'BookInfo',
+                    label: 'General Info',
+                    position: 10
+                  },
+        
+                        { id: 'BasicData',
+                          purpose: #STANDARD,
+                          type: #FIELDGROUP_REFERENCE,
+                          parentId: 'GeneralInfo',
+                          label: 'Basic Data',
+                          position: 10,
+                          targetQualifier: 'BasicData'
+                        },
+            
+                        { id: 'DateTimeData',
+                          purpose: #STANDARD,
+                          type: #FIELDGROUP_REFERENCE,
+                          parentId: 'GeneralInfo',
+                          label: 'Data/Time',
+                          position: 20,
+                          targetQualifier: 'DateTimeData'
+                        },
+            
+                        { id: 'CustomerData',
+                          purpose: #STANDARD,
+                          type: #FIELDGROUP_REFERENCE,
+                          parentId: 'GeneralInfo',
+                          label: 'Customer Data',
+                          position: 30,
+                          targetQualifier: 'CustomerData'
+                        },
+        
+                        { id: 'ManagerData',
+                          purpose: #STANDARD,
+                          type: #FIELDGROUP_REFERENCE,
+                          parentId: 'GeneralInfo',
+                          label: 'Manager Data',
+                          position: 40,
+                          targetQualifier: 'ManagerData'
+                        },
+                     
+        
+        
               { id: 'Trip',
                 purpose: #STANDARD,
                 type: #LINEITEM_REFERENCE,
                 label: 'Trip info',
                 position: 20,
                 targetElement: '_Trip'
-               },
-    
-              { id: 'General', 
-                purpose: #STANDARD, 
-                type: #IDENTIFICATION_REFERENCE,
-                parentId: 'Trip', 
-                label: 'Trip info', 
-                position: 20 },                
-                               
+              },
 
-
-              { id: 'TripWeight',
-                label: 'Weight',
-                position: 30,
-                purpose: #STANDARD,
-                targetElement: '_Trip',
-                targetQualifier: 'TripWeight',
-                type: #CHART_REFERENCE },
-
-
-
+  
+        
               { id: 'Customer',
                 purpose: #STANDARD,
                 type: #LINEITEM_REFERENCE,
                 label: 'Customer info',
                 position: 40,
                 targetElement: '_Customer'
-               },
-
-
-
+              },
+        
+        
+        
               { id: 'Employee',
                 purpose: #STANDARD,
                 type: #LINEITEM_REFERENCE,
                 label: 'Manager info',
                 position: 50,
                 targetElement: '_Employee'
-               }
-
-
-  //              { id: 'DateCr',
-  //                purpose: #STANDARD,
-  //                type: #FIELDGROUP_REFERENCE,
-  //                parentId: 'Trip',
-  //                label: 'Created',
-  //                position: 70,
-  //                targetQualifier: 'DateCrGroup'
-  //               },
-
-  //              { id: 'DateChg',
-  //                purpose: #STANDARD,
-  //                type: #FIELDGROUP_REFERENCE,
-  //                parentId: 'Trip',
-  //                label: 'Changed',
-  //                position: 80,
-  //                targetQualifier: 'DateChgGroup'
-  //                }
-             ]     
+              }
+         ]     
         
   @UI.lineItem: [{ type: #FOR_ACTION,position: 5, dataAction: 'EndBook',  label: 'Close Book' }]         
   @UI.hidden: true

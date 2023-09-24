@@ -7,33 +7,47 @@ define root view entity ZTDA_C_EMPL
   as projection on ZTDA_I_EMPL
 {
   key UUID,
+  
       @EndUserText.label: 'Employee ID'
       ID,
+
       @Search.defaultSearchElement: true
-//      @Consumption.valueHelpDefinition: [{ entity : { name: 'ZTDA_i_addr_pool', element: 'ID'} } ]
+      //      @Consumption.valueHelpDefinition: [{ entity : { name: 'ZTDA_i_addr_pool', element: 'ID'} } ]
       @Consumption.valueHelpDefinition: [{ entity : { name: 'ZTDA_i_addr', element: 'ID'} } ]
       @EndUserText.label: 'Address ID'
       AddressID,
+
       @Search.defaultSearchElement: true
       @Consumption.valueHelpDefinition: [{ entity : { name: 'ZTDA_I_POS', element: 'ID'} } ]
       @EndUserText.label: 'Position ID'
       PositionID,
+
       @EndUserText.label: 'Position Name'
-      PositionName,      
+      PositionName,
+
       @EndUserText.label: 'Birth date'
       BirthDate,
+
       @EndUserText.label: 'Begining Date'
       BegDate,
+
       @EndUserText.label: 'End date'
       EndDate,
+
       @EndUserText.label: 'Surname'
       Surname,
+
       @EndUserText.label: 'Name'
       Name,
+
       @EndUserText.label: 'Patronic name'
       PatronycName,
-//      ImgURL,
+
+      //      ImgURL,
+
       LocLastChanged,
+
+
 
       _Booking,
       _Trip,

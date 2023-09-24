@@ -3,29 +3,115 @@
   headerInfo: {
     typeName: 'Car',
     typeNamePlural: 'Cars',
-    imageUrl: 'ImgURL',    
-    title: { type: #STANDARD, label: 'ID', value: 'RegNumber' } 
+    imageUrl: 'ImgURL',
+    title: { type: #STANDARD, label: 'ID', value: 'ID' }
   }
 }
 annotate view ZTDA_I_CAR with
 {
-  @UI.facet: [ { id: 'Car', purpose: #STANDARD, type: #COLLECTION,
-                label: 'Car info', position: 10 },
-              { id: 'General', purpose: #STANDARD, type: #IDENTIFICATION_REFERENCE,
-                parentId: 'Car', label: 'Car info', position: 10 },
+  @UI.facet: [
+             { id: 'ID',
+              purpose: #HEADER,
+              type: #DATAPOINT_REFERENCE,
+              position: 10,
+              targetQualifier: 'ID'
+             },
 
-              { id: 'Material', purpose: #STANDARD, type: #LINEITEM_REFERENCE,
-                label: 'Fuel info', position: 20, targetElement: '_Material'}                               
-//              { id: 'DateCr', purpose: #STANDARD, type: #FIELDGROUP_REFERENCE,
-//                parentId: 'Employee', label: 'Created', position: 30,
-//                targetQualifier: 'DateCrGroup' },
-//              { id: 'DateChg', purpose: #STANDARD, type: #FIELDGROUP_REFERENCE,
-//                parentId: 'Employee', label: 'Changed', position: 40,
-//                targetQualifier: 'DateChgGroup' }
+             { id: 'Model',
+              purpose: #HEADER,
+              type: #DATAPOINT_REFERENCE,
+              position: 20,
+              targetQualifier: 'Model'
+             },
+
+             { id: 'RegNumber',
+              purpose: #HEADER,
+              type: #DATAPOINT_REFERENCE,
+              position: 30,
+              targetQualifier: 'RegNumber'
+             },
+             
+
+
+              { id: 'CarInfo',
+                purpose: #STANDARD,
+                type: #COLLECTION,
+                label: 'Car info',
+                position: 10
+                },
+
+
+                  { id: 'GeneralInfo',
+                    purpose: #STANDARD,
+                    type: #COLLECTION,
+                    parentId: 'CarInfo',
+                    label: 'General Info',
+                    position: 10
+                    },
+
+                        { id: 'BasicData',
+                          purpose: #STANDARD,
+                          type: #FIELDGROUP_REFERENCE,
+                          parentId: 'GeneralInfo',
+                          label: 'Basic Data',
+                          position: 10,
+                          targetQualifier: 'BasicData'
+                         },
+            
+            
+                        { id: 'TechnicalData',
+                          purpose: #STANDARD,
+                          type: #FIELDGROUP_REFERENCE,
+                          parentId: 'GeneralInfo',
+                          label: 'Technical Data',
+                          position: 20,
+                          targetQualifier: 'TechnicalData'
+                         },
+            
+            
+                        { id: 'DateTimeData',
+                          purpose: #STANDARD,
+                          type: #FIELDGROUP_REFERENCE,
+                          parentId: 'GeneralInfo',
+                          label: 'Data/Time',
+                          position: 30,
+                          targetQualifier: 'DateTimeData'
+                         },
+            
+            
+              //            { id: 'FuelData',
+              //              purpose: #STANDARD,
+              //              type: #FIELDGROUP_REFERENCE,
+              //              parentId: 'GeneralInfo',
+              //              label: 'Fuel Data',
+              //              position: 40,
+              //              targetQualifier: 'FuelData'
+              //             },
+
+
+
+                  { id: 'Fuel',
+                    purpose: #STANDARD,
+                    type: #LINEITEM_REFERENCE,
+                    label: 'Fuel info',
+                    position: 20,
+                    targetElement: '_Material'
+                  }
+                  
+                  
+//                  { id: 'Trip',
+//                    purpose: #STANDARD,
+//                    type: #LINEITEM_REFERENCE,
+//                    label: 'Trip info',
+//                    position: 30,
+//                    targetElement: '_Trip'
+//                  }
              ]
+
+  @UI.hidden: true
   UUID;
 
-  @UI.dataPoint:{ 
+  @UI.dataPoint:{
     qualifier: 'ImgURL'
     }
   @UI.lineItem: [ {
@@ -33,16 +119,12 @@ annotate view ZTDA_I_CAR with
   importance: #MEDIUM,
   label: ''
   } ]
-  @UI.identification: [ {
-    position: 10 ,
-    label: ''
-  } ]
-//  @UI.fieldGroup: [{
-//    qualifier: 'BasicData',
-//    position: 10 
-//  } ]      
   ImgURL;
-  
+
+  @UI.dataPoint:{
+    qualifier: 'ID',
+    title:'CarID'
+    }
   @UI.lineItem: [ {
     position: 10 ,
     importance: #MEDIUM,
@@ -51,31 +133,47 @@ annotate view ZTDA_I_CAR with
   @UI.identification: [ {
     position: 10 ,
     label: ''
+  } ]
+  @UI.fieldGroup: [{
+    qualifier: 'BasicData',
+    position: 10
   } ]
   ID;
 
-  @UI.lineItem: [ {
-    position: 20 ,
-    importance: #MEDIUM,
-    label: ''
-  } ]
-  @UI.identification: [ {
-    position: 20 ,
-    label: ''
-  } ]
-  BrandID;
+//  @UI.lineItem: [ {
+//    position: 20 ,
+//    importance: #MEDIUM,
+//    label: ''
+//  } ]
+//  @UI.identification: [ {
+//    position: 20 ,
+//    label: ''
+//  } ]
+//  @UI.fieldGroup: [{
+//    qualifier: 'BasicData',
+//    position: 20
+//  } ]
+//  BrandID;
 
   @UI.lineItem: [ {
     position: 25 ,
     importance: #MEDIUM,
-    label: ''
+    label: 'Brand'
   } ]
   @UI.identification: [ {
     position: 25 ,
-    label: ''
+    label: 'Brand'
+  } ]
+  @UI.fieldGroup: [{
+    qualifier: 'BasicData',
+    position: 25
   } ]
   BrandName;
-  
+
+  @UI.dataPoint:{
+    qualifier: 'Model',
+    title:'Model'
+    }
   @UI.lineItem: [ {
     position: 30 ,
     importance: #MEDIUM,
@@ -84,31 +182,43 @@ annotate view ZTDA_I_CAR with
   @UI.identification: [ {
     position: 30 ,
     label: ''
+  } ]
+  @UI.fieldGroup: [{
+    qualifier: 'BasicData',
+    position: 30
   } ]
   Model;
 
-  @UI.lineItem: [ {
-    position: 40 ,
-    importance: #MEDIUM,
-    label: ''
-  } ]
-  @UI.identification: [ {
-    position: 40 ,
-    label: ''
-  } ]
-  Color;
-  
+//  @UI.lineItem: [ {
+//    position: 40 ,
+//    importance: #MEDIUM,
+//    label: ''
+//  } ]
+//  @UI.identification: [ {
+//    position: 40 ,
+//    label: ''
+//  } ]
+//  @UI.fieldGroup: [{
+//    qualifier: 'TechnicalData',
+//    position: 10
+//  } ]
+//  Color;
+
   @UI.lineItem: [ {
     position: 45 ,
     importance: #MEDIUM,
-    label: ''
+    label: 'Color'
   } ]
   @UI.identification: [ {
     position: 45 ,
-    label: ''
+    label: 'Color'
+  } ]
+  @UI.fieldGroup: [{
+    qualifier: 'TechnicalData',
+    position: 20
   } ]
   ColorName;
-  
+
   @UI.lineItem: [ {
     position: 50 ,
     importance: #MEDIUM,
@@ -117,6 +227,10 @@ annotate view ZTDA_I_CAR with
   @UI.identification: [ {
     position: 50 ,
     label: ''
+  } ]
+  @UI.fieldGroup: [{
+    qualifier: 'DateTimeData',
+    position: 10
   } ]
   YerCreation;
 
@@ -129,6 +243,10 @@ annotate view ZTDA_I_CAR with
     position: 60 ,
     label: ''
   } ]
+  @UI.fieldGroup: [{
+    qualifier: 'TechnicalData',
+    position: 30
+  } ]
   TechnicType;
 
   @UI.lineItem: [ {
@@ -139,6 +257,10 @@ annotate view ZTDA_I_CAR with
   @UI.identification: [ {
     position: 70 ,
     label: ''
+  } ]
+  @UI.fieldGroup: [{
+    qualifier: 'TechnicalData',
+    position: 40
   } ]
   BodyType;
 
@@ -151,6 +273,10 @@ annotate view ZTDA_I_CAR with
     position: 80 ,
     label: ''
   } ]
+  @UI.fieldGroup: [{
+    qualifier: 'DateTimeData',
+    position: 20
+  } ]
   DateRegistration;
 
   @UI.lineItem: [ {
@@ -162,8 +288,16 @@ annotate view ZTDA_I_CAR with
     position: 90 ,
     label: ''
   } ]
+  @UI.fieldGroup: [{
+    qualifier: 'TechnicalData',
+    position: 50
+  } ]
   BodyNumber;
 
+  @UI.dataPoint:{
+    qualifier: 'RegNumber',
+    title:'RegNumber'
+    }
   @UI.lineItem: [ {
     position: 100 ,
     importance: #MEDIUM,
@@ -172,6 +306,10 @@ annotate view ZTDA_I_CAR with
   @UI.identification: [ {
     position: 100 ,
     label: ''
+  } ]
+  @UI.fieldGroup: [{
+    qualifier: 'BasicData',
+    position: 40
   } ]
   RegNumber;
 
@@ -184,6 +322,10 @@ annotate view ZTDA_I_CAR with
     position: 110 ,
     label: ''
   } ]
+  @UI.fieldGroup: [{
+    qualifier: 'TechnicalData',
+    position: 50
+  } ]
   Consumption;
 
   @UI.lineItem: [ {
@@ -194,6 +336,10 @@ annotate view ZTDA_I_CAR with
   @UI.identification: [ {
     position: 120 ,
     label: ''
+  } ]
+  @UI.fieldGroup: [{
+    qualifier: 'TechnicalData',
+    position: 60
   } ]
   Capacity;
 
@@ -206,6 +352,10 @@ annotate view ZTDA_I_CAR with
     position: 130 ,
     label: ''
   } ]
+  @UI.fieldGroup: [{
+    qualifier: 'TechnicalData',
+    position: 70
+  } ]
   AxesNumber;
 
   @UI.lineItem: [ {
@@ -216,6 +366,10 @@ annotate view ZTDA_I_CAR with
   @UI.identification: [ {
     position: 140 ,
     label: ''
+  } ]
+  @UI.fieldGroup: [{
+    qualifier: 'BasicData',
+    position: 50
   } ]
   PaytoolID;
 
@@ -228,6 +382,10 @@ annotate view ZTDA_I_CAR with
     position: 150 ,
     label: ''
   } ]
+  @UI.fieldGroup: [{
+    qualifier: 'FuelData',
+    position: 10
+  } ]
   Fuel;
 
   @UI.lineItem: [ {
@@ -239,17 +397,25 @@ annotate view ZTDA_I_CAR with
     position: 160 ,
     label: ''
   } ]
+  @UI.fieldGroup: [{
+    qualifier: 'FuelData',
+    position: 20
+  } ]
   FuelName;
-  
+
   @UI.lineItem: [ {
     position: 170 ,
     importance: #MEDIUM,
-    criticality: 'Criticality',    
+    criticality: 'Criticality',
     label: ''
   } ]
   @UI.identification: [ {
     position: 170 ,
     label: ''
+  } ]
+  @UI.fieldGroup: [{
+    qualifier: 'BasicData',
+    position: 60
   } ]
   CarStatus;
 

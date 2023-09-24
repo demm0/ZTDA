@@ -115,7 +115,7 @@ annotate view ZTDA_I_BANK with
     importance: #MEDIUM,
     label: 'Bank ID'
   } ]
-  // Отображение в ???
+  // Отображение в текущей entity
   @UI.identification: [ {
     position: 20 ,
     label: 'Bank ID'

@@ -38,11 +38,12 @@ authorization master ( global )
   determination calc_default_data on save { create; }
   determination calc_status on save { create; update; field BookStatus; }
   determination calc_Weight on modify { field WeightDeliv; }
+  determination fill_end_date on save { field EndDate; }
 
   // Validation
   validation validate_Customer on save { field CustID; }
   validation validate_Manager on save { field ManagID; }
-//  validation validate_Dates on save { field BegDate, BegTime, EndDate, EndTime; }
+  validation validate_Dates on save { field BegDate, BegTime, EndDate, EndTime; }
 
   // Actions
   action ( features : instance ) EndBook result [1..*] $self;
@@ -55,9 +56,10 @@ authorization master ( global )
   {
     determination calc_default_data;
     determination calc_status;
+
     validation validate_Customer;
     validation validate_Manager;
-//    validation validate_Dates;
+    validation validate_Dates;
   }
 
   mapping for ztda_a_book

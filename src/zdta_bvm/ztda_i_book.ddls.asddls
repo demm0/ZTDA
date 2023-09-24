@@ -15,7 +15,7 @@ define root view entity ZTDA_I_BOOK
       beg_date             as BegDate,
       @Semantics.dateTime: true
       beg_time             as BegTime,
-      @Semantics.dateTime: true
+//      @Semantics.dateTime: true
       end_date             as EndDate,
       @Semantics.dateTime: true
       end_time             as EndTime,
